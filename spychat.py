@@ -1,4 +1,4 @@
-from spy_details import spy, Spy, ChatMessage, friends
+from spydetails import spy, Spy, ChatMessage, friends
 from steganography.steganography import Steganography
 from datetime import datetime
 from termcolor import colored
