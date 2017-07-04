@@ -6,7 +6,7 @@ from termcolor import colored
 STATUS_MESSAGES = ['Hey Whats Up ,Its Mukesh Here, Mukesh Dubey', 'Busy', 'User Is Available..']
 special = ['SOS','sos','help','HELP','save','SAVE']
 
-print colored("<-----Hello! Let's get started----->","green")
+print colored("<----- Hello! Let's get started ----->","green")
 
 question = colored("Do you want to continue as ",'blue') + colored(spy.salutation,'red') + " " + colored(spy.name,'red') + " (Y/N)? "
 existing = raw_input(question)
@@ -50,7 +50,7 @@ def add_status():
         print colored('The choice you Entered is not valid! Press either y or n.','red')
 
     if updated_status_message:
-        print 'Your updated status message is: %s' % (updated_status_message)
+        print colored('Your updated status message is: %s','blue') % (updated_status_message)
     else:
         print colored("You current don't have a status update",'red')
     return updated_status_message
@@ -75,7 +75,7 @@ def add_friend():
         friends.append(new_friend)
         print colored('Your Friend Is Added!','green')
     else:
-        print colored("Sorry! Invalid entry. Your Friend is Not Elligible to be a Spy",'red')
+        print colored("Sorry! Invalid entry. Your Friend is Not Eligible to be a Spy",'red')
 
     return len(friends)
 
@@ -103,6 +103,11 @@ def send_message():
     text = raw_input(colored("What's the secret message u wan't to Convey? ",'blue'))
     Steganography.encode(original_image, output_path, text)
 
+    temp = text.split(' ')
+    for i in special:
+        if i in temp:
+            temp[temp.index(i)] = colored('Please Help Me !! I Am in Danger..','red')
+    text = str.join(' ',temp)
     new_chat = ChatMessage(text,True)
 
     friends[friend_choice].chats.append(new_chat)
@@ -125,26 +130,34 @@ def read_message():
         for i in special:
             if i in temp:
                 temp[temp.index(i)] = colored('Please Help Me,I am in Danger!!','red')
-        secret_text = str.join(' ', temp)
+        secret_text = str.join(' ',temp)
+        if len(secret_text)>100:
+            print colored("As ur friend Annoying u ,Do u Want to Delete him or her From your Friend lists.",'red')
+            choice = raw_input(colored("If u want to Delete ur friend choose:--> 'Y' , If not choose:--> 'N' ",'blue'))
+            if choice == "Y":
+                del [sender]
+                print colored("Now your Friend is no More in Your Friend List",'green')
+                exit()
+        else:
+            new_chat = ChatMessage(secret_text, False)
 
-        new_chat = ChatMessage(secret_text, False)
+            friends[sender].chats.append(new_chat)
 
-        friends[sender].chats.append(new_chat)
-
-        print colored("Your secret message has been saved!",'green')
+            print colored("Your secret message has been saved!",'green')
 
 
 def read_chat_history():
 
     read_for = select_a_friend()
 
-    print '\n6'
+    print '\n'
 
     for chat in friends[read_for].chats:
+        time = chat.time.strftime("%d %B %Y")
         if chat.sent_by_me:
-            print '[%s] %s: %s' % (chat.time.strftime("%d %B %Y"), 'Sent By Me:', chat.message)
+            print '[%s] %s: %s' % (colored(time,'blue'), 'Sent By Me:', chat.message)
         else:
-            print '[%s] %s said: %s' % (chat.time.strftime("%d %B %Y"), friends[read_for].name, chat.message)
+            print '[%s] %s read: %s' % (colored(time,'blue'), friends[read_for].name, chat.message)
 
 
 def start_chat(spy):
