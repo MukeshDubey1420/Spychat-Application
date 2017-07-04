@@ -1,4 +1,4 @@
-# <-----Introducing  Comments in Python------->
+# By using hash sign"#"  <-----We are Introducing Comments in Python------->
 from spydetails import spy, Spy, ChatMessage, friends        # Importing spy files in main programme ..
 from steganography.steganography import Steganography        # Importing steganography so as to encoding or decoding the secret text inside the image ...
 from datetime import datetime                                # Importing date time so as to notify the timing for chats and date on which message is sent...
@@ -23,7 +23,7 @@ def add_status():                                           #Function Regarding 
     else:
         print colored("You don't have any status message currently \n",'red')
 
-    default = raw_input(colored("Do you want to select from the older status (y/n)? ",'blue'))
+    default = raw_input(colored("Do you want to select from the older status (y/n)? ",'blue'))    # Default case if he want to select the status from older status messages.
 
     if default.upper() == "N":
         new_status_message = raw_input(colored("Write the status message do you want to set? ",'blue'))
@@ -39,13 +39,13 @@ def add_status():                                           #Function Regarding 
 
         for message in STATUS_MESSAGES:
             print '%d. %s' % (item_position, message)
-            item_position = item_position + 1
+            item_position = item_position + 1                             # To make it user Friendly as user does not know about zero indexing ..
 
         message_selection = int(raw_input(colored("\nChoose from the above messages ",'green')))    # Selecting the status from older statuses...
 
 
         if len(STATUS_MESSAGES) >= message_selection:
-            updated_status_message = STATUS_MESSAGES[message_selection - 1]
+            updated_status_message = STATUS_MESSAGES[message_selection - 1]  # Updating again zero indexing so as to understand by python . to make it language friendly..
 
     else:
         print colored('The choice you Entered is not valid! Press either y or n.','red')
@@ -67,10 +67,10 @@ def add_friend():                                                           # De
     new_friend.name = new_friend.salutation + " " + new_friend.name
 
     new_friend.age = raw_input("Age?")
-    new_friend.age = int(new_friend.age)
+    new_friend.age = int(new_friend.age)                    # Taking age as input in string and then converting it into int data type ..
 
     new_friend.rating = raw_input("Spy rating?")
-    new_friend.rating = float(new_friend.rating)
+    new_friend.rating = float(new_friend.rating)           # Taking rating as input in string forn and then converting it into float data type ..
 
     if len(new_friend.name) > 0 and new_friend.age > 19 and new_friend.rating >= 4:    # To be a Valid user as a spy following parameters or conditions are set here..
         friends.append(new_friend)                                                     # Appending the friend in the List of friend lists.
@@ -204,19 +204,19 @@ if existing == "Y":      # If user enters "Y" then admin details are passed to s
     start_chat(spy)
 else:                    # If the user selects "N" Then a new user have to pass the details to verify it and the he is able to start the application..
 
-    spy = Spy('','',0,0.0)
+    spy = Spy('','',0,0.0)    # Initially user has no data ..it is blank. after getting details is is to be filled.
 
 
     spy.name = raw_input(colored("<---Welcome to spy chat, To Further proceed you must tell me your spy name first: --->",'red'))
 
-    if len(spy.name) > 0:
+    if len(spy.name) > 0:      # checking Validation of empty name ..
         spy.salutation = raw_input(colored("Should I call you Mr. or Ms.?: ",'blue'))
 
         spy.age = raw_input(colored("Enter your age?",'blue'))
-        spy.age = int(spy.age)
+        spy.age = int(spy.age)             # Converting Age of spy into int data type ..
 
         spy.rating = raw_input(colored("What is your spy rating?",'blue'))
-        spy.rating = float(spy.rating)
+        spy.rating = float(spy.rating)      # Converts the rating into float .bcz Raw_input returns string type .
 
         start_chat(spy)
     else:
