@@ -1,33 +1,29 @@
+from datetime import datetime
 
-spy = {
-    'name': 'Mukesh Dubey',
-    'salutation': 'Mr.',
-    'age': 20,
-    'rating': 4.7,
-    'is_online': True
+class Spy:
 
-}
+    def __init__(self, name, salutation, age, rating):
+        self.name = name
+        self.salutation = salutation
+        self.age = age
+        self.rating = rating
+        self.is_online = True
+        self.chats = []
+        self.current_status_message = None
 
-friends = [
-    {
-        'name': 'Rohit',
-        'saultation': 'Mr.',
-        'rating': 3.0,
-        'age': 22,
-        'chats': []
-    },
-    {
-        'name': 'Nitika Sharma',
-        'saultation': 'Ms.',
-        'rating': 4.95,
-        'age': 20,
-        'chats': []
-    },
-    {
-        'name': 'Mukul',
-        'saultation': 'Mr.',
-        'rating': 4.39,
-        'age': 37,
-        'chats': []
-    }
-]
+
+class ChatMessage:
+
+    def __init__(self,message,sent_by_me):
+        self.message = message
+        self.time = datetime.now()
+        self.sent_by_me = sent_by_me
+
+spy = Spy('Mukesh Dubey', 'Mr.', 20, 4.7)
+
+friend_one = Spy('Rohit Malhotra', 'Mr.', 19,4.2)
+friend_two = Spy('Gajanand Dubey', 'Mr.', 19, 4.9)
+friend_three = Spy('Nitika Sharma', 'Ms.', 20,4.95)
+
+
+friends = [friend_one, friend_two, friend_three]
