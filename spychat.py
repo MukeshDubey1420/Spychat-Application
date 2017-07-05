@@ -121,8 +121,13 @@ def read_message():                               # Here we defining the read_ch
     sender = select_a_friend()
 
     output_path = raw_input(colored("Enter the name of the file In which secret Text is Hidden ?",'blue'))
+    try:
+        secret_text = Steganography.decode(output_path)
+    except ValueError:
+        print colored("No secret message is coded in the image!!", 'red')
+        exit()
 
-    secret_text = Steganography.decode(output_path)                              # Decoding the secret text hidden in the image ...i.e. we are extracting the secret code from the particular image ..and stores it..
+                          # Decoding the secret text hidden in the image ...i.e. we are extracting the secret code from the particular image ..and stores it..
     secret_text = str(secret_text)
     if secret_text == 'None':
         print colored("No secret message is coded in the image!!",'red')         # Case of error handling in case user does not writes the secret code to encode in the image ..
@@ -157,11 +162,11 @@ def read_chat_history():                          # We wanna to read the older c
     print '\n'
 
     for chat in friends[read_for].chats:
-        time = chat.time.strftime("%A %b %d %Y %H:%M:%S")    # Assigning the date ( date month year ), and time ( hour minute second) parameter ..
+        time = chat.time.strftime("%A, %b %d %Y %H:%M:%S")    # Assigning the date ( date month year ), and time ( hour minute second) parameter ..
         if chat.sent_by_me:
-            print '[%s] %s: %s' % (colored(time,'blue'), 'Sent By Me:', chat.message)    # Message sent by user at that date and time ..
+            print '[%s] %s: %s' % (colored(time,'blue'), colored('Sent By Me:','red'), chat.message)    # Message sent by user at that date and time ..
         else:
-            print '[%s] %s read: %s' % (colored(time,'blue'), friends[read_for].name, chat.message)   # Message read by user's friend at the particular date and time ..
+            print '[%s] %s read: %s' % (colored(time,'blue'), colored(friends[read_for].name,'red'), chat.message)   # Message read by user's friend at the particular date and time ..
 
 
 def start_chat(spy):                              # Starting the application by defining chat function..
@@ -200,7 +205,7 @@ def start_chat(spy):                              # Starting the application by 
     else:
         print colored('Sorry you are not of the correct age to be a spy','red')    # Age parameters IF NOT SATISFIES the condition..
 
-if existing == "Y":      # If user enters "Y" then admin details are passed to spychat function ..and application starts ...
+if existing.upper() == "Y":      # If user enters "Y" then admin details are passed to spychat function ..and application starts ...
     start_chat(spy)
 else:                    # If the user selects "N" Then a new user have to pass the details to verify it and the he is able to start the application..
 
@@ -222,3 +227,4 @@ else:                    # If the user selects "N" Then a new user have to pass 
     else:
         print colored('Please Mention a valid spy name','red')     # U Must have to Mention valid details ..
 
+  # End of the coding .........
