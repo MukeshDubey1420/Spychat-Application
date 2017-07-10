@@ -109,6 +109,7 @@ def send_message():                                                 # Here we de
         if i in temp:
             temp[temp.index(i)] = colored('Please Help Me !! I Am in Danger..','red')  # Replacing special words with a special type of emergency message ...
     text = str.join(' ',temp)
+    friends[friend_choice].chats_avg[0] = (friends[friend_choice].chats_avg[0] + len(temp))/(len(friends[friend_choice].chats)+1)
     new_chat = ChatMessage(text,True)
 
     friends[friend_choice].chats.append(new_chat)                                      # Appending the secret code in the chat list of that particular friend-->
@@ -137,6 +138,8 @@ def read_message():                               # Here we defining the read_ch
             if i in temp:
                 temp[temp.index(i)] = colored('Please Help Me,I am in Danger!!','red')
         secret_text = str.join(' ',temp)
+
+
         if len(secret_text)>100:                                                     # Handling a special case in which a friend is annoying u by sending a long text message then u have a option to delete that friend or not..
             print colored("As ur friend Annoying u ,Do u Want to Delete him or her From your Friend lists.",'red')
             choice = raw_input(colored("If u want to Delete ur friend choose:--> 'Y' , If not choose:--> 'N' ",'blue'))
@@ -164,7 +167,8 @@ def read_chat_history():                          # We wanna to read the older c
     for chat in friends[read_for].chats:
         time = chat.time.strftime("%A, %b %d %Y %H:%M:%S")    # Assigning the date ( date month year ), and time ( hour minute second) parameter ..
         if chat.sent_by_me:
-            print '[%s] %s: %s' % (colored(time,'blue'), colored('Sent By Me:','red'), chat.message)    # Message sent by user at that date and time ..
+            print '[%s] %s: %s' % (colored(time,'blue'), colored('Sent By Me:','red'), chat.message)# Message sent by user at that date and time ..
+            print colored(" avg chat",'blue'),friends[read_for].chats_avg[0]
         else:
             print '[%s] %s read: %s' % (colored(time,'blue'), colored(friends[read_for].name,'red'), chat.message)   # Message read by user's friend at the particular date and time ..
 
@@ -222,7 +226,14 @@ else:                    # If the user selects "N" Then a new user have to pass 
 
         spy.rating = raw_input(colored("What is your spy rating?",'blue'))
         spy.rating = float(spy.rating)      # Converts the rating into float .bcz Raw_input returns string type .
-
+        if spy.rating > 4.5:
+            print colored('Great ace! You are Excellent','blue')
+        elif spy.rating > 3.5 and spy.rating <= 4.5:
+            print colored('You are one of the good ones.','blue')
+        elif spy.rating >= 2.5 and spy.rating <= 3.5:
+            print colored('You can always do better','blue')
+        else:
+            print colored('We can always use somebody to help in the office.','blue')
         start_chat(spy)
     else:
         print colored('Please Mention a valid spy name','red')     # U Must have to Mention valid details ..
