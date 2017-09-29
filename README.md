@@ -33,7 +33,8 @@
  `python main.py`
 
  <br>
- ** Some previous commits are available with messed up codes at <a href="https://github.com/MukeshDubey1420/Spychat-Application>Spychat-Application </a> repository.
+
+ **Some previous commits are available with messed up codes at <a href="https://github.com/MukeshDubey1420/Spychat-Application>Spychat-Application </a> repository.**
 
  <br><br>
- This project is a part of Acadview full stack developer training program.
+ This project is a part of Acadview full Summer training program.
